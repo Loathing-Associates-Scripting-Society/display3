@@ -29,6 +29,7 @@
   "homepage": "https://github.com/Loathing-Associates-Scripting-Society/display3#readme",
   "devDependencies": {
     "gts": "^3.0.3",
+    "kolmafia": "^1.0.3",
     "typescript": "^4.1.3"
   }
 }
