@@ -1,8 +1,25 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "null",
+    "lib": [
+      "ES5",
+      "es2015.collection",
+      "es2015.core",
+      "es2015.generator",
+      "es2015.iterable",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "es2016.array.include",
+      "es2017.string",
+      "es2019.string"
+    ],
     "outDir": "build",
-    "rootDir": "."
+    "rootDir": ".",
+    "target": "ES5"
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["node-scripts/**/*", "spec/**/*", "src/**/*"]
 }
