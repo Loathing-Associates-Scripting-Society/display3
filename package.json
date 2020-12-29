@@ -1,0 +1,23 @@
+{
+  "name": "display3",
+  "version": "0.1.0",
+  "description": "Display Case relay override",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loathing-Associates-Scripting-Society/display3.git"
+  },
+  "keywords": [
+    "kolmafia",
+    "display case"
+  ],
+  "author": "pastelmind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Loathing-Associates-Scripting-Society/display3/issues"
+  },
+  "homepage": "https://github.com/Loathing-Associates-Scripting-Society/display3#readme"
+}
