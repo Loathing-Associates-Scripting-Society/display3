@@ -1,0 +1,16 @@
+// Base tsconfig inherited by other tsconfigs in this project
+// Note that the root tsconfig.json is a "solution" tsconfig
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "composite": true,
+    // Import CommonJS modules using standard ESM syntax
+    "esModuleInterop": true,
+    // vhtml-compatible JSX configuration
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "null",
+    "outDir": "build",
+    "rootDir": "."
+  }
+}

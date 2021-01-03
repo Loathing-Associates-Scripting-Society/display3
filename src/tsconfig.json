@@ -1,0 +1,25 @@
+// Configuration for source files
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    // JavaScript APIs supported by Rhino 1.7.13
+    // See https://mozilla.github.io/rhino/compat/engines.html for more info
+    "lib": [
+      "ES5",
+      "es2015.collection",
+      "es2015.core",
+      "es2015.generator",
+      "es2015.iterable",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "es2016.array.include",
+      "es2017.string",
+      "es2019.string"
+    ],
+    // Rhino doesn't support some ES2015 syntax (e.g. template strings)
+    "target": "ES5",
+    // Don't include any @types/* packages, which may otherwise pull in unwanted
+    // libs (e.g. "lib.es2017.object.d.ts")
+    "types": []
+  }
+}
