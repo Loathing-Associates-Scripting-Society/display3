@@ -4,6 +4,7 @@
   "description": "Display Case relay override",
   "private": "true",
   "scripts": {
+    "bundle": "rollup -c",
     "clean": "gts clean",
     "compile": "tsc -b",
     "fix": "gts fix",
