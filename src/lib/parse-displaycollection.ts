@@ -2,6 +2,8 @@
  * @file Provides methods for parsing displaycollection.php.
  */
 
+// Double import so that KoLmafia globals are available in the generated D.TS
+import 'kolmafia';
 import {print, xpath} from 'kolmafia';
 
 /**
