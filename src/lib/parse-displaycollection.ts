@@ -12,6 +12,8 @@ import {print, toItem, xpath} from 'kolmafia';
 export interface DisplayCaseShelf {
   /** Shelf name. The default shelf (shelf 0) has the name `"Display Case"`. */
   name: string;
+  /** ID of the owner of the shelf */
+  playerId: string;
   /**
    * Items in the shelf.
    * Items are usually sorted alphabetically (case-insensitive).
@@ -69,12 +71,13 @@ function findItemByDescid(descid: string): Item {
  */
 function parseShelfRow(
   row: string
-): [item: Item, amount: number, displayCaseName: string] {
-  const descidMatch = /descitem\((\d+),\d+\)/.exec(row);
+): [item: Item, amount: number, displayCaseName: string, playerId: string] {
+  const descidMatch = /descitem\((\d+),(\d+)\)/.exec(row);
   if (!descidMatch) {
     throw new Error(`Cannot find item descid pattern in "${row}"`);
   }
   const descid = descidMatch[1];
+  const playerId = descidMatch[2];
 
   const nameMatch = /<b>(.+?)<\/b>(?:\s*\((\d+)\))?/i.exec(row);
   if (!nameMatch) {
@@ -104,7 +107,7 @@ function parseShelfRow(
     }
   }
 
-  return [item, itemCount, itemName];
+  return [item, itemCount, itemName, playerId];
 }
 
 /**
@@ -115,13 +118,16 @@ function parseShelfRow(
 export function parseShelves(html: string): DisplayCaseShelf[] {
   return xpath(html, '//table//table//table[//font]').map(table => {
     const name = xpath(table, '//font/text()')[0];
+    let _playerId = '';
+
     const items = new Map(
       xpath(table, '//table//table//tr').map(row => {
-        const [item, amount, displayCaseName] = parseShelfRow(row);
+        const [item, amount, displayCaseName, playerId] = parseShelfRow(row);
+        _playerId = playerId;
         return [item, {amount, displayCaseName}];
       })
     );
 
-    return {name, items};
+    return {name, items, playerId: _playerId};
   });
 }

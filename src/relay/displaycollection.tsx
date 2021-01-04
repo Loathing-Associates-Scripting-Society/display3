@@ -13,9 +13,10 @@ sinceKolmafiaRevision(20550);
  * @param props
  * @param props.name Shelf name
  * @param props.items Map of items and their amounts in the shelf
+ * @param props.playerId ID of the owner of the Display Case (not the current player)
  */
 function MultiColumnShelfTable(props: DisplayCaseShelf): JSX.Element {
-  const {name, items} = props;
+  const {name, items, playerId} = props;
   return (
     <details class="display3-shelf" open>
       <summary
@@ -33,11 +34,13 @@ function MultiColumnShelfTable(props: DisplayCaseShelf): JSX.Element {
               <div class="display3-shelf__item-icon">
                 <img
                   src={`//images.kingdomofloathing.com/itemimages/${item.image}`}
+                  onclick={`descitem(${item.descid},${playerId})`}
                 />
               </div>
               <div class="display3-shelf__item-content">
                 <span
                   class="display3-shelf__item-name"
+                  onclick={`descitem(${item.descid},${playerId})`}
                   dangerouslySetInnerHTML={{__html: displayCaseName}}
                 ></span>
                 {amount !== 1 && (
@@ -118,7 +121,7 @@ export function main(): void {
   write(
     <>
       {shelves.map(shelf => (
-        <MultiColumnShelfTable name={shelf.name} items={shelf.items} />
+        <MultiColumnShelfTable {...shelf} />
       ))}
     </>
   );

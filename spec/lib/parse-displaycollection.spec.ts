@@ -130,6 +130,7 @@ describe('displaycollection', () => {
     const expectedShelves = [
       {
         name: 'Display Case',
+        playerId: '1234567890',
         items: new Map([
           [
             Item.get('Book of Old-Timey Carols'),
@@ -163,6 +164,7 @@ describe('displaycollection', () => {
       },
       {
         name: 'Items with nonstandard names',
+        playerId: '1234567890',
         items: new Map([
           [
             Item.get('Love Potion #0'),
@@ -176,6 +178,7 @@ describe('displaycollection', () => {
       },
       {
         name: 'Unexpected Gifts',
+        playerId: '1234567890',
         items: new Map([
           [
             Item.get('box of sunshine'),
@@ -185,6 +188,7 @@ describe('displaycollection', () => {
       },
       {
         name: "Dungeoneer's Dump",
+        playerId: '1234567890',
         items: new Map([
           [
             Item.get("Frosty's iceball"),
@@ -214,6 +218,7 @@ describe('displaycollection', () => {
       },
       {
         name: 'Skillbooks',
+        playerId: '1234567890',
         items: new Map([
           [
             Item.get("A Beginner's Guide to Charming Snakes"),

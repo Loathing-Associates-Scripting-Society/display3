@@ -64,12 +64,14 @@ summary.display3-shelf__title::-webkit-details-marker {
 }
 
 .display3-shelf__item-icon {
+  cursor: pointer;
   height: 30px;
   margin-right: 0.3rem;
   width: 30px;
 }
 
 .display3-shelf__item-name {
+  cursor: pointer;
   font-weight: bold;
 }
 
