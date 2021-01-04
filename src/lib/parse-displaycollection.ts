@@ -4,7 +4,7 @@
 
 // Double import so that KoLmafia globals are available in the generated D.TS
 import 'kolmafia';
-import {print, xpath} from 'kolmafia';
+import {print, toItem, xpath} from 'kolmafia';
 
 /**
  * Represents a single display case shelf.
@@ -37,6 +37,30 @@ function unescapeEntitiesInItemName(str: string): string {
   });
 }
 
+const ITEM_NONE = Item.get('none');
+const DESCID_TO_ITEM = new Map<string, Item>();
+
+/**
+ * @param descid
+ * @return Item matching the descid, or the 'none' item if no match is found
+ */
+function findItemByDescid(descid: string): Item {
+  if (DESCID_TO_ITEM.size === 0) {
+    for (const item of Item.all()) {
+      if (DESCID_TO_ITEM.has(item.descid)) {
+        print(
+          `Duplicate descid '${item.descid}' shared by ${DESCID_TO_ITEM.get(
+            item.descid
+          )} and ${item}`
+        );
+      } else {
+        DESCID_TO_ITEM.set(item.descid, item);
+      }
+    }
+  }
+  return DESCID_TO_ITEM.get(descid) || ITEM_NONE;
+}
+
 /**
  * Extracts the item and amount from the HTML for a Display Case table row.
  * @param row OuterHTML of the table row (`<tr/>`)
@@ -59,18 +83,23 @@ function parseShelfRow(row: string): [Item, number] {
 
   // Some items may have the same name. Thus, it is not safe to simply parse
   // an item by its name.
-  let item = Item.get(itemName);
-  if (item.descid !== descid) {
+  let item = toItem(itemName);
+  if (item === ITEM_NONE) {
+    print(`Unknown item name: ${itemName}`);
+  } else if (item.descid !== descid) {
     print(
       `Item descid mismatch for '${itemName}': expected ${item.descid}, got ${descid}`
     );
-    // Since KoL doesn't give us the item's ID, we must use the descid to search
-    // for the correct item.
-    const otherItem = Item.all().find(it => it.descid === descid);
-    if (!otherItem) {
+    item = ITEM_NONE;
+  }
+
+  // If the item cannot be retrieved for, the only available hint is to check
+  // the descid.
+  if (item === ITEM_NONE) {
+    item = findItemByDescid(descid);
+    if (item === ITEM_NONE) {
       throw new Error(`Cannot find item with descid: ${descid}`);
     }
-    item = otherItem;
   }
 
   return [item, itemCount];
