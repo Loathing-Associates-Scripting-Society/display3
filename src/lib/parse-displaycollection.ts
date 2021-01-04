@@ -116,7 +116,7 @@ function parseShelfRow(
  * @return Array of shelves
  */
 export function parseShelves(html: string): DisplayCaseShelf[] {
-  return xpath(html, '//table//table//table[//font]').map(table => {
+  return xpath(html, '//table//table//table[.//font]').map(table => {
     const name = xpath(table, '//font/text()')[0];
     let _playerId = '';
 
