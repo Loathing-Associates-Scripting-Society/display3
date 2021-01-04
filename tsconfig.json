@@ -1,5 +1,5 @@
 {
   "compilerOptions": {"outDir": "build"},
   "files": [],
-  "references": [{"path": "spec"}, {"path": "src"}]
+  "references": [{"path": "node-scripts"}, {"path": "spec"}, {"path": "src"}]
 }
