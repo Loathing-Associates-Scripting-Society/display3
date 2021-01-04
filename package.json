@@ -10,6 +10,8 @@
     "fix": "gts fix",
     "lint": "gts lint",
     "prepare": "npm run compile",
+    "prerelease": "npm run clean && npm run compile && npm run bundle",
+    "release": "node ./build/node-scripts/release-to-branch.js",
     "pretest": "npm run compile",
     "test": "jasmine",
     "posttest": "npm run lint"
