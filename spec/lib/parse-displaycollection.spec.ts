@@ -37,18 +37,9 @@ const shelf0Table =
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/beardgrin.gif" class=hand onClick=\'descitem(485610584,1234567890)\'></td><td valign=center><b>Crimbo smile</b></td></tr>' +
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/carddeck.gif" class=hand onClick=\'descitem(750777542,1234567890)\'></td><td valign=center><b>deck of tropical cards</b></td></tr>' +
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/eggballoon.gif" class=hand onClick=\'descitem(787370659,1234567890)\'></td><td valign=center><b>easter egg balloon</b></td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/lepbell.gif" class=hand onClick=\'descitem(898724678,1234567890)\'></td><td valign=center><b>enchanted leopard-print barbell</b> (12)</td></tr>' +
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/lewdcard.gif" class=hand onClick=\'descitem(683821625,1234567890)\'></td><td valign=center><b>lewd playing card</b> (3)</td></tr>' +
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/wrapping.gif" class=hand onClick=\'descitem(668178244,1234567890)\'></td><td valign=center><b>mummy costume</b></td></tr>' +
   '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/eggballoon.gif" class=hand onClick=\'descitem(975224635,1234567890)\'></td><td valign=center><b>oyster egg balloon</b></td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/chamfluteu.gif" class=hand onClick=\'descitem(671956082,1234567890)\'></td><td valign=center><b>Pan-Dimensional Gargle Blaster</b> (12)</td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/familiar24.gif" class=hand onClick=\'descitem(285361947,1234567890)\'></td><td valign=center><b>pumpkinhead mask</b></td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/mystribbon.gif" class=hand onClick=\'descitem(296832113,1234567890)\'></td><td valign=center><b>puzzling ribbon</b></td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/meatstack.gif" class=hand onClick=\'descitem(714527088,1234567890)\'></td><td valign=center><b>really dense meat stack</b> (4)</td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/briefcase.gif" class=hand onClick=\'descitem(731340264,1234567890)\'></td><td valign=center><b>SalesCo sample kit</b></td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/sammich.gif" class=hand onClick=\'descitem(646801760,1234567890)\'></td><td valign=center><b>sandwich of the gods</b> (12)</td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/bowlingball.gif" class=hand onClick=\'descitem(642797054,1234567890)\'></td><td valign=center><b>solid gold bowling ball</b> (16)</td></tr>' +
-  '<tr><td width=30 height=30><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/itemimages/wolfmanmask.gif" class=hand onClick=\'descitem(631779409,1234567890)\'></td><td valign=center><b>wolfman mask</b></td></tr>' +
   '</table></span></td></tr></table></center></td></tr><tr><td height=4></td></tr></table>';
 const shelf1Table =
   '<table  width=400  cellspacing=0 cellpadding=0><tr><td style="color: white;" align=center bgcolor=blue><b><a href=\'javascript:toggle("shelf1");\' class=nounder><font color=white>Items with nonstandard names</font></a></b></td></tr><tr><td style="padding: 5px; border: 1px solid blue;"><center><table><tr><td><span id=\'shelf1\'><table>' +
@@ -140,70 +131,180 @@ describe('displaycollection', () => {
       {
         name: 'Display Case',
         items: new Map([
-          [Item.get('Book of Old-Timey Carols'), 1],
-          [Item.get('Crimbo smile'), 1],
-          [Item.get('deck of tropical cards'), 1],
-          [Item.get('easter egg balloon'), 1],
-          [Item.get('enchanted leopard-print barbell'), 12],
-          [Item.get('lewd playing card'), 3],
-          [Item.get('mummy costume'), 1],
-          [Item.get('oyster egg balloon'), 1],
-          [Item.get('Pan-Dimensional Gargle Blaster'), 12],
-          [Item.get('pumpkinhead mask'), 1],
-          [Item.get('puzzling ribbon'), 1],
-          [Item.get('really dense meat stack'), 4],
-          [Item.get('SalesCo sample kit'), 1],
-          [Item.get('sandwich of the gods'), 12],
-          [Item.get('solid gold bowling ball'), 16],
-          [Item.get('wolfman mask'), 1],
+          [
+            Item.get('Book of Old-Timey Carols'),
+            {amount: 1, displayCaseName: 'Book of Old-Timey Carols'},
+          ],
+          [
+            Item.get('Crimbo smile'),
+            {amount: 1, displayCaseName: 'Crimbo smile'},
+          ],
+          [
+            Item.get('deck of tropical cards'),
+            {amount: 1, displayCaseName: 'deck of tropical cards'},
+          ],
+          [
+            Item.get('easter egg balloon'),
+            {amount: 1, displayCaseName: 'easter egg balloon'},
+          ],
+          [
+            Item.get('lewd playing card'),
+            {amount: 3, displayCaseName: 'lewd playing card'},
+          ],
+          [
+            Item.get('mummy costume'),
+            {amount: 1, displayCaseName: 'mummy costume'},
+          ],
+          [
+            Item.get('oyster egg balloon'),
+            {amount: 1, displayCaseName: 'oyster egg balloon'},
+          ],
         ]),
       },
       {
         name: 'Items with nonstandard names',
         items: new Map([
-          [Item.get('Love Potion #0'), 1],
-          [Item.get('spandex anniversary shorts'), 1],
+          [
+            Item.get('Love Potion #0'),
+            {amount: 1, displayCaseName: 'Love Potion #XYZ'},
+          ],
+          [
+            Item.get('spandex anniversary shorts'),
+            {amount: 1, displayCaseName: 'spandex anniversary shorts'},
+          ],
         ]),
       },
       {
         name: 'Unexpected Gifts',
-        items: new Map([[Item.get('box of sunshine'), 4]]),
+        items: new Map([
+          [
+            Item.get('box of sunshine'),
+            {amount: 4, displayCaseName: 'box of sunshine'},
+          ],
+        ]),
       },
       {
         name: "Dungeoneer's Dump",
         items: new Map([
-          [Item.get("Frosty's iceball"), 1],
-          [Item.get("Hodgman's varcolac paw"), 1],
-          [Item.get("Ol' Scratch's ash can"), 1],
-          [Item.get("Oscus's garbage can lid"), 1],
-          [Item.get("Zombo's empty eye"), 1],
-          [Item.get("Zombo's grievous greaves"), 1],
+          [
+            Item.get("Frosty's iceball"),
+            {amount: 1, displayCaseName: "Frosty's iceball"},
+          ],
+          [
+            Item.get("Hodgman's varcolac paw"),
+            {amount: 1, displayCaseName: "Hodgman's varcolac paw"},
+          ],
+          [
+            Item.get("Ol' Scratch's ash can"),
+            {amount: 1, displayCaseName: "Ol' Scratch's ash can"},
+          ],
+          [
+            Item.get("Oscus's garbage can lid"),
+            {amount: 1, displayCaseName: "Oscus's garbage can lid"},
+          ],
+          [
+            Item.get("Zombo's empty eye"),
+            {amount: 1, displayCaseName: "Zombo's empty eye"},
+          ],
+          [
+            Item.get("Zombo's grievous greaves"),
+            {amount: 1, displayCaseName: "Zombo's grievous greaves"},
+          ],
         ]),
       },
       {
         name: 'Skillbooks',
         items: new Map([
-          [Item.get("A Beginner's Guide to Charming Snakes"), 1],
-          [Item.get('Asleep in the Cemetery'), 1],
-          [Item.get("Benetton's Medley of Diversity"), 1],
-          [Item.get("Biddy Cracker's Old-Fashioned Cookbook"), 1],
-          [Item.get('Blizzards I Have Died In'), 1],
-          [Item.get('Crimbo Candy Cookbook'), 1],
-          [Item.get("Ellsbury's journal (used)"), 1],
-          [Item.get("Elron's Explosive Etude"), 1],
-          [Item.get("Inigo's Incantation of Inspiration"), 1],
-          [Item.get("Kissin' Cousins"), 1],
-          [Item.get('Let Me Be!'), 1],
-          [Item.get('Maxing, Relaxing'), 1],
-          [Item.get('Prelude of Precision'), 1],
-          [Item.get('Sensual Massage for Creeps'), 1],
-          [Item.get("Spellbook: Drescher's Annoying Noise"), 1],
-          [Item.get('Summer Nights'), 1],
-          [Item.get('Tales from the Fireside'), 1],
-          [Item.get('The Art of Slapfighting'), 1],
-          [Item.get('Travels with Jerry'), 1],
-          [Item.get('Uncle Romulus'), 1],
-          [Item.get('Zu Mannkäse Dienen'), 1],
+          [
+            Item.get("A Beginner's Guide to Charming Snakes"),
+            {
+              amount: 1,
+              displayCaseName: "A Beginner's Guide to Charming Snakes",
+            },
+          ],
+          [
+            Item.get('Asleep in the Cemetery'),
+            {amount: 1, displayCaseName: 'Asleep in the Cemetery'},
+          ],
+          [
+            Item.get("Benetton's Medley of Diversity"),
+            {amount: 1, displayCaseName: "Benetton's Medley of Diversity"},
+          ],
+          [
+            Item.get("Biddy Cracker's Old-Fashioned Cookbook"),
+            {
+              amount: 1,
+              displayCaseName: "Biddy Cracker's Old-Fashioned Cookbook",
+            },
+          ],
+          [
+            Item.get('Blizzards I Have Died In'),
+            {amount: 1, displayCaseName: 'Blizzards I Have Died In'},
+          ],
+          [
+            Item.get('Crimbo Candy Cookbook'),
+            {amount: 1, displayCaseName: 'Crimbo Candy Cookbook'},
+          ],
+          [
+            Item.get("Ellsbury's journal (used)"),
+            {amount: 1, displayCaseName: "Ellsbury's journal (used)"},
+          ],
+          [
+            Item.get("Elron's Explosive Etude"),
+            {amount: 1, displayCaseName: "Elron's Explosive Etude"},
+          ],
+          [
+            Item.get("Inigo's Incantation of Inspiration"),
+            {amount: 1, displayCaseName: "Inigo's Incantation of Inspiration"},
+          ],
+          [
+            Item.get("Kissin' Cousins"),
+            {amount: 1, displayCaseName: "Kissin' Cousins"},
+          ],
+          [Item.get('Let Me Be!'), {amount: 1, displayCaseName: 'Let Me Be!'}],
+          [
+            Item.get('Maxing, Relaxing'),
+            {amount: 1, displayCaseName: 'Maxing, Relaxing'},
+          ],
+          [
+            Item.get('Prelude of Precision'),
+            {amount: 1, displayCaseName: 'Prelude of Precision'},
+          ],
+          [
+            Item.get('Sensual Massage for Creeps'),
+            {amount: 1, displayCaseName: 'Sensual Massage for Creeps'},
+          ],
+          [
+            Item.get("Spellbook: Drescher's Annoying Noise"),
+            {
+              amount: 1,
+              displayCaseName: "Spellbook: Drescher's Annoying Noise",
+            },
+          ],
+          [
+            Item.get('Summer Nights'),
+            {amount: 1, displayCaseName: 'Summer Nights'},
+          ],
+          [
+            Item.get('Tales from the Fireside'),
+            {amount: 1, displayCaseName: 'Tales from the Fireside'},
+          ],
+          [
+            Item.get('The Art of Slapfighting'),
+            {amount: 1, displayCaseName: 'The Art of Slapfighting'},
+          ],
+          [
+            Item.get('Travels with Jerry'),
+            {amount: 1, displayCaseName: 'Travels with Jerry'},
+          ],
+          [
+            Item.get('Uncle Romulus'),
+            {amount: 1, displayCaseName: 'Uncle Romulus'},
+          ],
+          [
+            Item.get('Zu Mannkäse Dienen'),
+            {amount: 1, displayCaseName: 'Zu Mannkäse Dienen'},
+          ],
         ]),
       },
     ];

@@ -16,7 +16,7 @@ export interface DisplayCaseShelf {
    * Items in the shelf.
    * Items are usually sorted alphabetically (case-insensitive).
    */
-  items: Map<Item, number>;
+  items: Map<Item, {amount: number; displayCaseName: string}>;
 }
 
 /**
@@ -67,7 +67,9 @@ function findItemByDescid(descid: string): Item {
  * @return
  * @throws {Error}
  */
-function parseShelfRow(row: string): [Item, number] {
+function parseShelfRow(
+  row: string
+): [item: Item, amount: number, displayCaseName: string] {
   const descidMatch = /descitem\((\d+),\d+\)/.exec(row);
   if (!descidMatch) {
     throw new Error(`Cannot find item descid pattern in "${row}"`);
@@ -102,7 +104,7 @@ function parseShelfRow(row: string): [Item, number] {
     }
   }
 
-  return [item, itemCount];
+  return [item, itemCount, itemName];
 }
 
 /**
@@ -113,8 +115,11 @@ function parseShelfRow(row: string): [Item, number] {
 export function parseShelves(html: string): DisplayCaseShelf[] {
   return xpath(html, '//table//table//table[//font]').map(table => {
     const name = xpath(table, '//font/text()')[0];
-    const items = new Map<Item, number>(
-      xpath(table, '//table//table//tr').map(parseShelfRow)
+    const items = new Map(
+      xpath(table, '//table//table//tr').map(row => {
+        const [item, amount, displayCaseName] = parseShelfRow(row);
+        return [item, {amount, displayCaseName}];
+      })
     );
 
     return {name, items};

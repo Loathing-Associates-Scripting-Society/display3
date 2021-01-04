@@ -3,7 +3,7 @@ import {sinceKolmafiaRevision} from 'kolmafia-util';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import h from 'vhtml';
 
-import {parseShelves} from '../lib/parse-displaycollection';
+import {DisplayCaseShelf, parseShelves} from '../lib/parse-displaycollection';
 
 // Earliest version that supports JS-driven relay override scripts
 sinceKolmafiaRevision(20550);
@@ -14,10 +14,7 @@ sinceKolmafiaRevision(20550);
  * @param props.name Shelf name
  * @param props.items Map of items and their amounts in the shelf
  */
-function MultiColumnShelfTable(props: {
-  name: string;
-  items: Map<Item, number>;
-}): JSX.Element {
+function MultiColumnShelfTable(props: DisplayCaseShelf): JSX.Element {
   const {name, items} = props;
   return (
     <details class="display3-shelf" open>
@@ -31,7 +28,7 @@ function MultiColumnShelfTable(props: {
           .sort(([item1], [item2]) =>
             item1.name.toLowerCase().localeCompare(item2.name.toLowerCase())
           )
-          .map(([item, count]) => (
+          .map(([item, {amount, displayCaseName}]) => (
             <div class="display3-shelf__item">
               <div class="display3-shelf__item-icon">
                 <img
@@ -41,10 +38,10 @@ function MultiColumnShelfTable(props: {
               <div class="display3-shelf__item-content">
                 <span
                   class="display3-shelf__item-name"
-                  dangerouslySetInnerHTML={{__html: item.name}}
+                  dangerouslySetInnerHTML={{__html: displayCaseName}}
                 ></span>
-                {count !== 1 && (
-                  <span class="display3-shelf__item-count">({count})</span>
+                {amount !== 1 && (
+                  <span class="display3-shelf__item-count">({amount})</span>
                 )}
               </div>
             </div>
