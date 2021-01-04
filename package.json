@@ -11,9 +11,9 @@
     "lint": "gts lint",
     "prepare": "npm run compile",
     "prerelease": "npm run clean && npm run compile && npm run bundle",
-    "release": "node ./build/node-scripts/release-to-branch.js",
+    "release": "node --require=source-map-support/register ./build/node-scripts/release-to-branch.js",
     "pretest": "npm run compile",
-    "test": "jasmine",
+    "test": "jasmine --require=source-map-support/register",
     "posttest": "npm run lint"
   },
   "repository": {
@@ -48,6 +48,7 @@
     "rollup": "^2.35.1",
     "rollup-plugin-copy": "^3.3.0",
     "simple-git": "^2.31.0",
+    "source-map-support": "^0.5.19",
     "typescript": "^4.1.3"
   },
   "dependencies": {
