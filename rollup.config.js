@@ -6,6 +6,8 @@ import {nodeResolve} from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
 
+import pkg from './package.json';
+
 const OUTPUT_DIR = 'build/dist';
 const OUTPUT_DIR_RELAY = `${OUTPUT_DIR}/relay`;
 
@@ -17,6 +19,13 @@ const config = {
   external: ['kolmafia'],
   input: 'src/relay/displaycollection.tsx',
   output: {
+    banner: `
+/**
+ * ${pkg.name} - ${pkg.description}
+ * @version ${pkg.version}
+ * @license ${pkg.license}
+ * @preserve
+ */`.trim(),
     format: 'cjs',
     dir: OUTPUT_DIR_RELAY,
   },
