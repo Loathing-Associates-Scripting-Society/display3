@@ -42,7 +42,7 @@
     "fs-extra": "^9.0.1",
     "gts": "^3.0.3",
     "jasmine": "^3.6.3",
-    "kolmafia": "^1.0.3",
+    "kolmafia": "npm:kolmafia-types@0.0.3",
     "kolmafia-stubs": "0.0.1",
     "mock-require": "^3.0.3",
     "rollup": "^2.35.1",
