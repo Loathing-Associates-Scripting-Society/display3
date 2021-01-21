@@ -30,15 +30,15 @@ program
   .action(main)
   .parse(process.argv);
 
-interface CmdArgs {
+interface CmdOptions {
   branch: string;
   useTagMessage: string;
 }
 
-async function main(cmd: CmdArgs) {
+async function main(options: CmdOptions) {
   try {
-    const releaseBranch = cmd.branch;
-    const sourceTag = cmd.useTagMessage;
+    const releaseBranch = options.branch;
+    const sourceTag = options.useTagMessage;
 
     const git = simpleGit();
 
