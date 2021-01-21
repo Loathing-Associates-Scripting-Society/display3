@@ -2,7 +2,7 @@
   "name": "display3",
   "version": "0.1.0",
   "description": "Display Case relay override script for KoLmafia",
-  "private": "true",
+  "private": true,
   "scripts": {
     "bundle": "rollup -c",
     "clean": "gts clean",
