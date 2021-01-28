@@ -130,202 +130,259 @@ var notchat = true;//-->
 }
 
 describe('displaycollection', () => {
-  it('parseShelves()', () => {
-    const shelves = parseShelves(
-      generateInputHtml(
-        'This is the display case message',
-        shelf0Table + shelf1Table + shelf2Table + shelf3Table + shelf4Table
-      )
-    );
+  describe('parseShelves()', () => {
+    it('should parse shelves correctly', () => {
+      const shelves = parseShelves(
+        generateInputHtml(
+          'This is the display case message',
+          shelf0Table + shelf1Table + shelf2Table + shelf3Table + shelf4Table
+        )
+      );
 
-    const expectedShelves = [
-      {
-        name: 'Display Case',
-        playerId: '1234567890',
-        items: new Map([
-          [
-            Item.get('Book of Old-Timey Carols'),
-            {amount: 1, displayCaseName: 'Book of Old-Timey Carols'},
-          ],
-          [
-            Item.get('Crimbo smile'),
-            {amount: 1, displayCaseName: 'Crimbo smile'},
-          ],
-          [
-            Item.get('deck of tropical cards'),
-            {amount: 1, displayCaseName: 'deck of tropical cards'},
-          ],
-          [
-            Item.get('easter egg balloon'),
-            {amount: 1, displayCaseName: 'easter egg balloon'},
-          ],
-          [
-            Item.get('lewd playing card'),
-            {amount: 3, displayCaseName: 'lewd playing card'},
-          ],
-          [
-            Item.get('mummy costume'),
-            {amount: 1, displayCaseName: 'mummy costume'},
-          ],
-          [
-            Item.get('oyster egg balloon'),
-            {amount: 1, displayCaseName: 'oyster egg balloon'},
-          ],
-        ]),
-      },
-      {
-        name: 'Items with nonstandard names',
-        playerId: '1234567890',
-        items: new Map([
-          [
-            Item.get('Love Potion #0'),
-            {amount: 1, displayCaseName: 'Love Potion #XYZ'},
-          ],
-          [
-            Item.get('spandex anniversary shorts'),
-            {amount: 1, displayCaseName: 'spandex anniversary shorts'},
-          ],
-        ]),
-      },
-      {
-        name: 'Unexpected Gifts',
-        playerId: '1234567890',
-        items: new Map([
-          [
-            Item.get('box of sunshine'),
-            {amount: 4, displayCaseName: 'box of sunshine'},
-          ],
-        ]),
-      },
-      {
-        name: "Dungeoneer's Dump",
-        playerId: '1234567890',
-        items: new Map([
-          [
-            Item.get("Frosty's iceball"),
-            {amount: 1, displayCaseName: "Frosty's iceball"},
-          ],
-          [
-            Item.get("Hodgman's varcolac paw"),
-            {amount: 1, displayCaseName: "Hodgman's varcolac paw"},
-          ],
-          [
-            Item.get("Ol' Scratch's ash can"),
-            {amount: 1, displayCaseName: "Ol' Scratch's ash can"},
-          ],
-          [
-            Item.get("Oscus's garbage can lid"),
-            {amount: 1, displayCaseName: "Oscus's garbage can lid"},
-          ],
-          [
-            Item.get("Zombo's empty eye"),
-            {amount: 1, displayCaseName: "Zombo's empty eye"},
-          ],
-          [
-            Item.get("Zombo's grievous greaves"),
-            {amount: 1, displayCaseName: "Zombo's grievous greaves"},
-          ],
-        ]),
-      },
-      {
-        name: 'Skillbooks',
-        playerId: '1234567890',
-        items: new Map([
-          [
-            Item.get("A Beginner's Guide to Charming Snakes"),
-            {
-              amount: 1,
-              displayCaseName: "A Beginner's Guide to Charming Snakes",
-            },
-          ],
-          [
-            Item.get('Asleep in the Cemetery'),
-            {amount: 1, displayCaseName: 'Asleep in the Cemetery'},
-          ],
-          [
-            Item.get("Benetton's Medley of Diversity"),
-            {amount: 1, displayCaseName: "Benetton's Medley of Diversity"},
-          ],
-          [
-            Item.get("Biddy Cracker's Old-Fashioned Cookbook"),
-            {
-              amount: 1,
-              displayCaseName: "Biddy Cracker's Old-Fashioned Cookbook",
-            },
-          ],
-          [
-            Item.get('Blizzards I Have Died In'),
-            {amount: 1, displayCaseName: 'Blizzards I Have Died In'},
-          ],
-          [
-            Item.get('Crimbo Candy Cookbook'),
-            {amount: 1, displayCaseName: 'Crimbo Candy Cookbook'},
-          ],
-          [
-            Item.get("Ellsbury's journal (used)"),
-            {amount: 1, displayCaseName: "Ellsbury's journal (used)"},
-          ],
-          [
-            Item.get("Elron's Explosive Etude"),
-            {amount: 1, displayCaseName: "Elron's Explosive Etude"},
-          ],
-          [
-            Item.get("Inigo's Incantation of Inspiration"),
-            {amount: 1, displayCaseName: "Inigo's Incantation of Inspiration"},
-          ],
-          [
-            Item.get("Kissin' Cousins"),
-            {amount: 1, displayCaseName: "Kissin' Cousins"},
-          ],
-          [Item.get('Let Me Be!'), {amount: 1, displayCaseName: 'Let Me Be!'}],
-          [
-            Item.get('Maxing, Relaxing'),
-            {amount: 1, displayCaseName: 'Maxing, Relaxing'},
-          ],
-          [
-            Item.get('Prelude of Precision'),
-            {amount: 1, displayCaseName: 'Prelude of Precision'},
-          ],
-          [
-            Item.get('Sensual Massage for Creeps'),
-            {amount: 1, displayCaseName: 'Sensual Massage for Creeps'},
-          ],
-          [
-            Item.get("Spellbook: Drescher's Annoying Noise"),
-            {
-              amount: 1,
-              displayCaseName: "Spellbook: Drescher's Annoying Noise",
-            },
-          ],
-          [
-            Item.get('Summer Nights'),
-            {amount: 1, displayCaseName: 'Summer Nights'},
-          ],
-          [
-            Item.get('Tales from the Fireside'),
-            {amount: 1, displayCaseName: 'Tales from the Fireside'},
-          ],
-          [
-            Item.get('The Art of Slapfighting'),
-            {amount: 1, displayCaseName: 'The Art of Slapfighting'},
-          ],
-          [
-            Item.get('Travels with Jerry'),
-            {amount: 1, displayCaseName: 'Travels with Jerry'},
-          ],
-          [
-            Item.get('Uncle Romulus'),
-            {amount: 1, displayCaseName: 'Uncle Romulus'},
-          ],
-          [
-            Item.get('Zu Mannkäse Dienen'),
-            {amount: 1, displayCaseName: 'Zu Mannkäse Dienen'},
-          ],
-        ]),
-      },
-    ];
+      const expectedShelves = [
+        {
+          name: 'Display Case',
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get('Book of Old-Timey Carols'),
+              {amount: 1, displayCaseName: 'Book of Old-Timey Carols'},
+            ],
+            [
+              Item.get('Crimbo smile'),
+              {amount: 1, displayCaseName: 'Crimbo smile'},
+            ],
+            [
+              Item.get('deck of tropical cards'),
+              {amount: 1, displayCaseName: 'deck of tropical cards'},
+            ],
+            [
+              Item.get('easter egg balloon'),
+              {amount: 1, displayCaseName: 'easter egg balloon'},
+            ],
+            [
+              Item.get('lewd playing card'),
+              {amount: 3, displayCaseName: 'lewd playing card'},
+            ],
+            [
+              Item.get('mummy costume'),
+              {amount: 1, displayCaseName: 'mummy costume'},
+            ],
+            [
+              Item.get('oyster egg balloon'),
+              {amount: 1, displayCaseName: 'oyster egg balloon'},
+            ],
+          ]),
+        },
+        {
+          name: 'Items with nonstandard names',
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get('Love Potion #0'),
+              {amount: 1, displayCaseName: 'Love Potion #XYZ'},
+            ],
+            [
+              Item.get('spandex anniversary shorts'),
+              {amount: 1, displayCaseName: 'spandex anniversary shorts'},
+            ],
+          ]),
+        },
+        {
+          name: 'Unexpected Gifts',
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get('box of sunshine'),
+              {amount: 4, displayCaseName: 'box of sunshine'},
+            ],
+          ]),
+        },
+        {
+          name: "Dungeoneer's Dump",
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get("Frosty's iceball"),
+              {amount: 1, displayCaseName: "Frosty's iceball"},
+            ],
+            [
+              Item.get("Hodgman's varcolac paw"),
+              {amount: 1, displayCaseName: "Hodgman's varcolac paw"},
+            ],
+            [
+              Item.get("Ol' Scratch's ash can"),
+              {amount: 1, displayCaseName: "Ol' Scratch's ash can"},
+            ],
+            [
+              Item.get("Oscus's garbage can lid"),
+              {amount: 1, displayCaseName: "Oscus's garbage can lid"},
+            ],
+            [
+              Item.get("Zombo's empty eye"),
+              {amount: 1, displayCaseName: "Zombo's empty eye"},
+            ],
+            [
+              Item.get("Zombo's grievous greaves"),
+              {amount: 1, displayCaseName: "Zombo's grievous greaves"},
+            ],
+          ]),
+        },
+        {
+          name: 'Skillbooks',
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get("A Beginner's Guide to Charming Snakes"),
+              {
+                amount: 1,
+                displayCaseName: "A Beginner's Guide to Charming Snakes",
+              },
+            ],
+            [
+              Item.get('Asleep in the Cemetery'),
+              {amount: 1, displayCaseName: 'Asleep in the Cemetery'},
+            ],
+            [
+              Item.get("Benetton's Medley of Diversity"),
+              {amount: 1, displayCaseName: "Benetton's Medley of Diversity"},
+            ],
+            [
+              Item.get("Biddy Cracker's Old-Fashioned Cookbook"),
+              {
+                amount: 1,
+                displayCaseName: "Biddy Cracker's Old-Fashioned Cookbook",
+              },
+            ],
+            [
+              Item.get('Blizzards I Have Died In'),
+              {amount: 1, displayCaseName: 'Blizzards I Have Died In'},
+            ],
+            [
+              Item.get('Crimbo Candy Cookbook'),
+              {amount: 1, displayCaseName: 'Crimbo Candy Cookbook'},
+            ],
+            [
+              Item.get("Ellsbury's journal (used)"),
+              {amount: 1, displayCaseName: "Ellsbury's journal (used)"},
+            ],
+            [
+              Item.get("Elron's Explosive Etude"),
+              {amount: 1, displayCaseName: "Elron's Explosive Etude"},
+            ],
+            [
+              Item.get("Inigo's Incantation of Inspiration"),
+              {
+                amount: 1,
+                displayCaseName: "Inigo's Incantation of Inspiration",
+              },
+            ],
+            [
+              Item.get("Kissin' Cousins"),
+              {amount: 1, displayCaseName: "Kissin' Cousins"},
+            ],
+            [
+              Item.get('Let Me Be!'),
+              {amount: 1, displayCaseName: 'Let Me Be!'},
+            ],
+            [
+              Item.get('Maxing, Relaxing'),
+              {amount: 1, displayCaseName: 'Maxing, Relaxing'},
+            ],
+            [
+              Item.get('Prelude of Precision'),
+              {amount: 1, displayCaseName: 'Prelude of Precision'},
+            ],
+            [
+              Item.get('Sensual Massage for Creeps'),
+              {amount: 1, displayCaseName: 'Sensual Massage for Creeps'},
+            ],
+            [
+              Item.get("Spellbook: Drescher's Annoying Noise"),
+              {
+                amount: 1,
+                displayCaseName: "Spellbook: Drescher's Annoying Noise",
+              },
+            ],
+            [
+              Item.get('Summer Nights'),
+              {amount: 1, displayCaseName: 'Summer Nights'},
+            ],
+            [
+              Item.get('Tales from the Fireside'),
+              {amount: 1, displayCaseName: 'Tales from the Fireside'},
+            ],
+            [
+              Item.get('The Art of Slapfighting'),
+              {amount: 1, displayCaseName: 'The Art of Slapfighting'},
+            ],
+            [
+              Item.get('Travels with Jerry'),
+              {amount: 1, displayCaseName: 'Travels with Jerry'},
+            ],
+            [
+              Item.get('Uncle Romulus'),
+              {amount: 1, displayCaseName: 'Uncle Romulus'},
+            ],
+            [
+              Item.get('Zu Mannkäse Dienen'),
+              {amount: 1, displayCaseName: 'Zu Mannkäse Dienen'},
+            ],
+          ]),
+        },
+      ];
 
-    expect(shelves).toHaveSize(expectedShelves.length);
-    expect(shelves).toEqual(expectedShelves);
+      expect(shelves).toHaveSize(expectedShelves.length);
+      expect(shelves).toEqual(expectedShelves);
+    });
+
+    it('should correctly handle display case messages with links', () => {
+      const shelves = parseShelves(
+        generateInputHtml(
+          'Display case message with links<br><br>A link on next line<br>www.google.com<br><a target=_blank href="http://www.example.com/"><font color=blue>[link]</font></a> http:// www.example.com/<br>more links: <a target=_blank href="https://www.kingdomofloathing.com/"><font color=blue>[link]</font></a> https:// www.kingdomofloathin g.com/<br>end of links',
+          shelf0Table
+        )
+      );
+
+      const expectedShelves = [
+        {
+          name: 'Display Case',
+          playerId: '1234567890',
+          items: new Map([
+            [
+              Item.get('Book of Old-Timey Carols'),
+              {amount: 1, displayCaseName: 'Book of Old-Timey Carols'},
+            ],
+            [
+              Item.get('Crimbo smile'),
+              {amount: 1, displayCaseName: 'Crimbo smile'},
+            ],
+            [
+              Item.get('deck of tropical cards'),
+              {amount: 1, displayCaseName: 'deck of tropical cards'},
+            ],
+            [
+              Item.get('easter egg balloon'),
+              {amount: 1, displayCaseName: 'easter egg balloon'},
+            ],
+            [
+              Item.get('lewd playing card'),
+              {amount: 3, displayCaseName: 'lewd playing card'},
+            ],
+            [
+              Item.get('mummy costume'),
+              {amount: 1, displayCaseName: 'mummy costume'},
+            ],
+            [
+              Item.get('oyster egg balloon'),
+              {amount: 1, displayCaseName: 'oyster egg balloon'},
+            ],
+          ]),
+        },
+      ];
+
+      expect(shelves).toHaveSize(expectedShelves.length);
+      expect(shelves).toEqual(expectedShelves);
+    });
   });
 });
