@@ -1,3 +1,7 @@
+:root {
+  --display3-shelf-gap: 0.5rem;
+}
+
 .display3-shelf {
   border: 1px solid blue;
   border-radius: 5px;
@@ -49,29 +53,34 @@ summary.display3-shelf__title::-webkit-details-marker {
 }
 
 .display3-shelf__items {
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 0.5rem;
-}
-
-/*
- If the frame becomes narrow, collapse the columns as needed.
- Note: Use (3 + 1) instead of 3 since we have to account for borders and margins
- of parent elements.
- */
-@media (max-width: calc(12rem * (3 + 1))) {
-  .display3-shelf__items {
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  }
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 var(--display3-shelf-gap) var(--display3-shelf-gap) 0;
 }
 
 .display3-shelf__item {
   align-items: center;
   display: flex;
+  margin: var(--display3-shelf-gap) 0 0 var(--display3-shelf-gap);
+  width: calc(33.3% - var(--display3-shelf-gap));
   /* Prevent long item names from being center-aligned when squished into
      multiple lines*/
   text-align: initial;
+}
+
+/*
+ If the frame becomes narrow, collapse the columns as needed.
+ */
+@media (min-width: 30rem) and (max-width: 50rem) {
+  .display3-shelf__item {
+    width: calc(50% - var(--display3-shelf-gap));
+  }
+}
+
+@media (max-width: 30rem) {
+  .display3-shelf__item {
+    width: calc(100% - var(--display3-shelf-gap));
+  }
 }
 
 .display3-shelf__item-icon {
