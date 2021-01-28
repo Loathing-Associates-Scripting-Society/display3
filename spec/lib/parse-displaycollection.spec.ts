@@ -85,13 +85,20 @@ const shelf4Table =
   '</table></span></td></tr></table></center></td></tr><tr><td height=4></td></tr></table>';
 
 /**
- * Test input HTML
- *
- * - Player name replaced with "Player Name"
- * - Player ID replaced with 1234567890
+ * Generates test input HTML
+ * @param displayCaseMessage HTML for the user-supplied display case message
+ * @param shelfTable HTML snippet for each shelf <table></table>
  */
-const html =
-  `<html><head>
+function generateInputHtml(
+  displayCaseMessage: string,
+  shelfTables: string
+): string {
+  // Notes about the input HTML:
+  //
+  // - Player name replaced with "Player Name"
+  // - Player ID replaced with 1234567890
+  return (
+    `<html><head>
 <script language=Javascript>
 <!--
 if (parent.frames.length == -1) location.href="game.php";
@@ -114,18 +121,22 @@ var notchat = true;//-->
 <script language="Javascript" src="/basics.js"></script><link rel="stylesheet" href="/basics.1.css" /></head>
 
 <body>
-<div id='menu' class=rcm></div><centeR><table  width=95%  cellspacing=0 cellpadding=0><tr><td style="color: white;" align=center bgcolor=blue><b>Display Case (<a style='color: white; text-decoration: none;' href="showplayer.php?who=1234567890">Player Name</a>)</b></td></tr><tr><td style="padding: 5px; border: 1px solid blue;"><center><table><tr><td><table><tr><td valign=center><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/museum/displaycase.gif" width=100 height=100></td><td valign=center>Collecting Rubber WWBD? bracelets(ID #1992).</td></tr></table><p><center>` +
-  shelf0Table +
-  shelf1Table +
-  shelf2Table +
-  shelf3Table +
-  shelf4Table +
-  `</center><p><center><a href="managecollection.php">Manage your Display Case</a></center><p><center><a href="museum.php?place=collections">Back to The Museum</a></center></td></tr></table></center></td></tr><tr><td height=4></td></tr></table></center></body><script src="/onfocus.1.js"></script></html>
-`;
+<div id='menu' class=rcm></div><centeR><table  width=95%  cellspacing=0 cellpadding=0><tr><td style="color: white;" align=center bgcolor=blue><b>Display Case (<a style='color: white; text-decoration: none;' href="showplayer.php?who=1234567890">Player Name</a>)</b></td></tr><tr><td style="padding: 5px; border: 1px solid blue;"><center><table><tr><td><table><tr><td valign=center><img src="https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/museum/displaycase.gif" width=100 height=100></td><td valign=center>` +
+    displayCaseMessage +
+    '</td></tr></table><p><center>' +
+    shelfTables +
+    '</center><p><center><a href="managecollection.php">Manage your Display Case</a></center><p><center><a href="museum.php?place=collections">Back to The Museum</a></center></td></tr></table></center></td></tr><tr><td height=4></td></tr></table></center></body><script src="/onfocus.1.js"></script></html>'
+  );
+}
 
 describe('displaycollection', () => {
   it('parseShelves()', () => {
-    const shelves = parseShelves(html);
+    const shelves = parseShelves(
+      generateInputHtml(
+        'This is the display case message',
+        shelf0Table + shelf1Table + shelf2Table + shelf3Table + shelf4Table
+      )
+    );
 
     const expectedShelves = [
       {
