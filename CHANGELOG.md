@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2021-01-29
+
 ### Fixed
 
 - Use CSS Flexbox instead of Grid to correctly render shelves with >1000 rows
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[unreleased]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.1...HEAD
+[unreleased]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Loathing-Associates-Scripting-Society/display3/releases/tag/v0.1.0
