@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - When the viewport becomes narrow, collapse the table into 1-2 columns (#3)
+- Use more distinguishable color for collapsed tables (#4)
 
 ## [0.1.0] - 2021-01-05
 

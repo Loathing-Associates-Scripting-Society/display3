@@ -20,7 +20,7 @@ details.display3-shelf:not([open]) {
 }
 
 :not([open]) > .display3-shelf__title {
-  background-color: navy;
+  background-color: #330099;
   color: #cccccc;
 }
 
