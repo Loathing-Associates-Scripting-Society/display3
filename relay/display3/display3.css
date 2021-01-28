@@ -20,7 +20,7 @@ details.display3-shelf:not([open]) {
 }
 
 :not([open]) > .display3-shelf__title {
-  background-color: navy;
+  background-color: #330099;
   color: #cccccc;
 }
 
@@ -55,6 +55,17 @@ summary.display3-shelf__title::-webkit-details-marker {
   padding: 0.5rem;
 }
 
+/*
+ If the frame becomes narrow, collapse the columns as needed.
+ Note: Use (3 + 1) instead of 3 since we have to account for borders and margins
+ of parent elements.
+ */
+@media (max-width: calc(12rem * (3 + 1))) {
+  .display3-shelf__items {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+}
+
 .display3-shelf__item {
   align-items: center;
   display: flex;
@@ -71,8 +82,8 @@ summary.display3-shelf__title::-webkit-details-marker {
 }
 
 .display3-shelf__item-name {
-  cursor: pointer;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .display3-shelf__item-count {
