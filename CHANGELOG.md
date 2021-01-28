@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2021-01-28
+
 ### Changed
 
 - When the viewport becomes narrow, collapse the table into 1-2 columns (#3)
@@ -22,5 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[unreleased]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Loathing-Associates-Scripting-Society/display3/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Loathing-Associates-Scripting-Society/display3/releases/tag/v0.1.0
