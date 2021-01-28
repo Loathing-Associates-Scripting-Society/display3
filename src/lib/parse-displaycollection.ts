@@ -63,6 +63,24 @@ function findItemByDescid(descid: string): Item {
   return DESCID_TO_ITEM.get(descid) || ITEM_NONE;
 }
 
+const itemsWithDuplicateNames = (() => {
+  const itemsSeen = new Map<string, Item[]>();
+  for (const item of Item.all()) {
+    let itemsWithName = itemsSeen.get(item.name);
+    if (!itemsWithName) {
+      itemsSeen.set(item.name, (itemsWithName = []));
+    }
+    itemsWithName.push(item);
+  }
+  const duplicates = new Map<string, Item[]>();
+  itemsSeen.forEach((items, name) => {
+    if (items.length > 1) {
+      duplicates.set(name, items);
+    }
+  });
+  return duplicates;
+})();
+
 /**
  * Extracts the item and amount from the HTML for a Display Case table row.
  * @param row OuterHTML of the table row (`<tr/>`)
@@ -86,9 +104,17 @@ function parseShelfRow(
   const itemName = unescapeEntitiesInItemName(nameMatch[1].trim());
   const itemCount = nameMatch[2] ? Number(nameMatch[2]) : 1;
 
-  // Some items may have the same name. Thus, it is not safe to simply parse
-  // an item by its name.
-  let item = toItem(itemName);
+  // If multiple items have the same name, `toItem()` prints a warning in the
+  // gCLI. Avoid this by checking for duplicate names ourselves.
+  const duplicates = itemsWithDuplicateNames.get(itemName);
+  let item = duplicates?.find(it => it.descid === descid);
+
+  if (!item) {
+    // Some items may have the same name. Thus, it is not safe to simply parse
+    // an item by its name.
+    item = toItem(itemName);
+  }
+
   if (item === ITEM_NONE) {
     print(`Unknown item name: ${itemName}`);
   } else if (item.descid !== descid) {
