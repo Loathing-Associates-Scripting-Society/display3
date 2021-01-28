@@ -136,13 +136,15 @@ function parseShelfRow(
   return [item, itemCount, itemName, playerId];
 }
 
+const XPATH_SHELF_SELECTOR = '//table//table//table[.//table//span[@id]]';
+
 /**
  * Parse `displaycollection.php` and extract shelf information.
  * @param html HTML source of `displaycollection.php`
  * @return Array of shelves
  */
 export function parseShelves(html: string): DisplayCaseShelf[] {
-  return xpath(html, '//table//table//table[.//font]').map(table => {
+  return xpath(html, XPATH_SHELF_SELECTOR).map(table => {
     const name = xpath(table, '//font/text()')[0];
     let _playerId = '';
 
