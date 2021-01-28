@@ -1,6 +1,6 @@
 /**
  * display3 - Display Case relay override script for KoLmafia
- * @version 0.1.0
+ * @version 0.1.1
  * @license MIT
  * @preserve
  */
@@ -304,7 +304,7 @@ function MultiColumnShelfTable(props) {
                 vhtml("div", { class: "display3-shelf__item-icon" },
                     vhtml("img", { src: "//images.kingdomofloathing.com/itemimages/" + item.image, onclick: "descitem(" + item.descid + "," + playerId + ")" })),
                 vhtml("div", { class: "display3-shelf__item-content" },
-                    vhtml("span", { class: "display3-shelf__item-name", onclick: "descitem(" + item.descid + "," + playerId + ")", dangerouslySetInnerHTML: { __html: displayCaseName } }),
+                    vhtml("a", { class: "display3-shelf__item-name", href: "desc_item.php?whichitem=" + item.descid + "&otherplayer=" + playerId, target: "_blank", onclick: "descitem(" + item.descid + "," + playerId + "); return false", dangerouslySetInnerHTML: { __html: displayCaseName } }),
                     amount !== 1 && (vhtml("span", { class: "display3-shelf__item-count" },
                         "(",
                         amount,
