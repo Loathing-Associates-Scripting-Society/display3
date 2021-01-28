@@ -38,11 +38,13 @@ function MultiColumnShelfTable(props: DisplayCaseShelf): JSX.Element {
                 />
               </div>
               <div class="display3-shelf__item-content">
-                <span
+                <a
                   class="display3-shelf__item-name"
-                  onclick={`descitem(${item.descid},${playerId})`}
+                  href={`desc_item.php?whichitem=${item.descid}&otherplayer=${playerId}`}
+                  target="_blank"
+                  onclick={`descitem(${item.descid},${playerId}); return false`}
                   dangerouslySetInnerHTML={{__html: displayCaseName}}
-                ></span>
+                ></a>
                 {amount !== 1 && (
                   <span class="display3-shelf__item-count">({amount})</span>
                 )}
