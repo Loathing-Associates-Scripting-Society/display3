@@ -82,8 +82,8 @@ summary.display3-shelf__title::-webkit-details-marker {
 }
 
 .display3-shelf__item-name {
-  cursor: pointer;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .display3-shelf__item-count {
