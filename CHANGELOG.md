@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (#7)
 - Don't print warnings to the gCLI if there are multiple exact matches for the
   item name. (#8)
+- Fix a bug that caused a Display Case message containing an external link to be
+  incorrectly parsed as a shelf. (#9)
 
 ## [0.1.1] - 2021-01-28
 
