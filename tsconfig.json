@@ -1,4 +1,7 @@
+// "Solution" tsconfig for compiling all TS files
+// Also used for type checking within VS Code
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {"outDir": "build"},
   "files": [],
   "references": [{"path": "node-scripts"}, {"path": "spec"}, {"path": "src"}]
