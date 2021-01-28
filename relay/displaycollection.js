@@ -1,6 +1,6 @@
 /**
  * display3 - Display Case relay override script for KoLmafia
- * @version 0.1.1
+ * @version 0.1.2
  * @license MIT
  * @preserve
  */
@@ -222,6 +222,24 @@ function findItemByDescid(descid) {
     }
     return DESCID_TO_ITEM.get(descid) || ITEM_NONE;
 }
+var itemsWithDuplicateNames = (function () {
+    var itemsSeen = new Map();
+    for (var _i = 0, _a = Item.all(); _i < _a.length; _i++) {
+        var item = _a[_i];
+        var itemsWithName = itemsSeen.get(item.name);
+        if (!itemsWithName) {
+            itemsSeen.set(item.name, (itemsWithName = []));
+        }
+        itemsWithName.push(item);
+    }
+    var duplicates = new Map();
+    itemsSeen.forEach(function (items, name) {
+        if (items.length > 1) {
+            duplicates.set(name, items);
+        }
+    });
+    return duplicates;
+})();
 /**
  * Extracts the item and amount from the HTML for a Display Case table row.
  * @param row OuterHTML of the table row (`<tr/>`)
@@ -241,9 +259,15 @@ function parseShelfRow(row) {
     }
     var itemName = unescapeEntitiesInItemName(nameMatch[1].trim());
     var itemCount = nameMatch[2] ? Number(nameMatch[2]) : 1;
-    // Some items may have the same name. Thus, it is not safe to simply parse
-    // an item by its name.
-    var item = kolmafia.toItem(itemName);
+    // If multiple items have the same name, `toItem()` prints a warning in the
+    // gCLI. Avoid this by checking for duplicate names ourselves.
+    var duplicates = itemsWithDuplicateNames.get(itemName);
+    var item = duplicates === null || duplicates === void 0 ? void 0 : duplicates.find(function (it) { return it.descid === descid; });
+    if (!item) {
+        // Some items may have the same name. Thus, it is not safe to simply parse
+        // an item by its name.
+        item = kolmafia.toItem(itemName);
+    }
     if (item === ITEM_NONE) {
         kolmafia.print("Unknown item name: " + itemName);
     }
@@ -261,13 +285,14 @@ function parseShelfRow(row) {
     }
     return [item, itemCount, itemName, playerId];
 }
+var XPATH_SHELF_SELECTOR = '//table//table//table[.//table//span[@id]]';
 /**
  * Parse `displaycollection.php` and extract shelf information.
  * @param html HTML source of `displaycollection.php`
  * @return Array of shelves
  */
 function parseShelves(html) {
-    return kolmafia.xpath(html, '//table//table//table[.//font]').map(function (table) {
+    return kolmafia.xpath(html, XPATH_SHELF_SELECTOR).map(function (table) {
         var name = kolmafia.xpath(table, '//font/text()')[0];
         var _playerId = '';
         var items = new Map(kolmafia.xpath(table, '//table//table//tr').map(function (row) {
