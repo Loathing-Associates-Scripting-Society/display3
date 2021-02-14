@@ -238,12 +238,18 @@ export class Item {
 Object.freeze(Item);
 
 allowInstantiateItem = true;
+
+/**
+ * The 'none' item instance.
+ */
+export const ITEM_NONE = new Item({name: 'none', descid: ''});
+
 /**
  * All known items. This ensures that `Item.get()` always returns the same
  * object instance.
  */
 const ALL_ITEMS = [
-  new Item({name: 'none', descid: ''}),
+  ITEM_NONE,
   new Item({name: 'anniversary balsa wood socks', descid: '843314870'}),
   new Item({name: 'Asleep in the Cemetery', descid: '801300658'}),
   new Item({name: 'Blizzards I Have Died In', descid: '374672848'}),
@@ -299,11 +305,6 @@ const ALL_ITEMS = [
   new Item({name: 'Love Potion #0', descid: '863678027'}),
 ];
 allowInstantiateItem = false;
-
-/**
- * The 'none' item instance.
- */
-export const ITEM_NONE = ALL_ITEMS[0];
 
 /**
  * Item lookup table by name (lowercase).
