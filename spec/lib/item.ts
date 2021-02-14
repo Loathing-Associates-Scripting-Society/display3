@@ -312,3 +312,18 @@ allowInstantiateItem = false;
 const ITEMS_BY_NAME = new Map<string, Item>(
   ALL_ITEMS.map(item => [item.name.toLowerCase(), item])
 );
+
+/**
+ * Item lookup table by descid
+ */
+const ITEMS_BY_DESCID = new Map<string, Item>(
+  ALL_ITEMS.map(item => [item.descid, item])
+);
+
+/**
+ * Facsimilie implementation of KoLmafia's `descToItem()`.
+ * @param descid
+ */
+export function descToItem(descid: string): Item {
+  return ITEMS_BY_DESCID.get(descid) ?? ITEM_NONE;
+}
