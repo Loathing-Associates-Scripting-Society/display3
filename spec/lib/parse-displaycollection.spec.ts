@@ -1,11 +1,12 @@
 import mock from 'mock-require';
 import {xpath} from 'kolmafia-stubs';
 
-import {Item, ITEM_NONE, JavaException} from './item';
+import {descToItem, Item, ITEM_NONE, JavaException} from './item';
 
 //-------- Inject mock objects and methods
 
 mock('kolmafia', {
+  descToItem,
   getRevision: () => 20590,
   print(str: string): void {
     console.log(str);

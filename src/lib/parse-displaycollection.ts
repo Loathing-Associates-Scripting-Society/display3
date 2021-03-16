@@ -4,7 +4,7 @@
 
 // Double import so that KoLmafia globals are available in the generated D.TS
 import 'kolmafia';
-import {print, toItem, xpath} from 'kolmafia';
+import {descToItem, xpath} from 'kolmafia';
 
 /**
  * Represents a single display case shelf.
@@ -40,46 +40,6 @@ function unescapeEntitiesInItemName(str: string): string {
 }
 
 const ITEM_NONE = Item.get('none');
-const DESCID_TO_ITEM = new Map<string, Item>();
-
-/**
- * @param descid
- * @return Item matching the descid, or the 'none' item if no match is found
- */
-function findItemByDescid(descid: string): Item {
-  if (DESCID_TO_ITEM.size === 0) {
-    for (const item of Item.all()) {
-      if (DESCID_TO_ITEM.has(item.descid)) {
-        print(
-          `Duplicate descid '${item.descid}' shared by ${DESCID_TO_ITEM.get(
-            item.descid
-          )} and ${item}`
-        );
-      } else {
-        DESCID_TO_ITEM.set(item.descid, item);
-      }
-    }
-  }
-  return DESCID_TO_ITEM.get(descid) || ITEM_NONE;
-}
-
-const itemsWithDuplicateNames = (() => {
-  const itemsSeen = new Map<string, Item[]>();
-  for (const item of Item.all()) {
-    let itemsWithName = itemsSeen.get(item.name);
-    if (!itemsWithName) {
-      itemsSeen.set(item.name, (itemsWithName = []));
-    }
-    itemsWithName.push(item);
-  }
-  const duplicates = new Map<string, Item[]>();
-  itemsSeen.forEach((items, name) => {
-    if (items.length > 1) {
-      duplicates.set(name, items);
-    }
-  });
-  return duplicates;
-})();
 
 /**
  * Extracts the item and amount from the HTML for a Display Case table row.
@@ -104,33 +64,13 @@ function parseShelfRow(
   const itemName = unescapeEntitiesInItemName(nameMatch[1].trim());
   const itemCount = nameMatch[2] ? Number(nameMatch[2]) : 1;
 
-  // If multiple items have the same name, `toItem()` prints a warning in the
-  // gCLI. Avoid this by checking for duplicate names ourselves.
-  const duplicates = itemsWithDuplicateNames.get(itemName);
-  let item = duplicates?.find(it => it.descid === descid);
-
-  if (!item) {
-    // Some items may have the same name. Thus, it is not safe to simply parse
-    // an item by its name.
-    item = toItem(itemName);
-  }
+  // Identifying an item by name is unreliable, since an item may have a
+  // different name for each player, and multiple items may have the same name.
+  // Instead, always check the descid, which is always unique.
+  const item = descToItem(descid);
 
   if (item === ITEM_NONE) {
-    print(`Unknown item name: ${itemName}`);
-  } else if (item.descid !== descid) {
-    print(
-      `Item descid mismatch for '${itemName}': expected ${item.descid}, got ${descid}`
-    );
-    item = ITEM_NONE;
-  }
-
-  // If the item cannot be retrieved for, the only available hint is to check
-  // the descid.
-  if (item === ITEM_NONE) {
-    item = findItemByDescid(descid);
-    if (item === ITEM_NONE) {
-      throw new Error(`Cannot find item with descid: ${descid}`);
-    }
+    throw new Error(`Item '${itemName}' has unknown descid: ${descid}`);
   }
 
   return [item, itemCount, itemName, playerId];
