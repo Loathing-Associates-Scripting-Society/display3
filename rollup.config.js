@@ -5,7 +5,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
-
+import createBubleConfig from 'buble-config-rhino';
+import buble from '@rollup/plugin-buble';
 import pkg from './package.json';
 
 const OUTPUT_DIR = 'build/dist';
@@ -39,9 +40,11 @@ const config = {
       composite: false,
       // Don't emit type declarations and source maps
       declaration: false,
+      module: 'ES2015',
       sourceMap: false,
       outDir: OUTPUT_DIR_RELAY,
     }),
+    buble(createBubleConfig()),
     copy({
       flatten: false,
       targets: [{src: 'src/**/*.css', dest: OUTPUT_DIR}],

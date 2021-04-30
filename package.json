@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/Loathing-Associates-Scripting-Society/display3#readme",
   "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-typescript": "^8.2.0",
@@ -38,6 +39,7 @@
     "@types/jasmine": "^3.6.6",
     "@types/mock-require": "^2.0.0",
     "@types/vhtml": "^2.2.1",
+    "buble-config-rhino": "0.0.1",
     "commander": "^7.1.0",
     "fs-extra": "^9.1.0",
     "gts": "^3.1.0",
