@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Performance improvements ([#11])
+- Use [Bublé] to transpile ES2015-2018 syntax ([#12])
 
 [#11]: https://github.com/Loathing-Associates-Scripting-Society/display3/pull/11
+[#12]: https://github.com/Loathing-Associates-Scripting-Society/display3/pull/12
 
 ## [0.1.2] - 2021-01-29
 
