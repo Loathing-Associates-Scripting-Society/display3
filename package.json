@@ -4,11 +4,11 @@
   "description": "Display Case relay override script for KoLmafia",
   "private": true,
   "scripts": {
-    "bundle": "rollup -c",
+    "build": "rollup -c",
     "clean": "gts clean",
     "fix": "gts fix",
     "lint": "gts lint",
-    "prerelease": "npm run clean && npm run bundle",
+    "prerelease": "npm run clean && npm run build",
     "release": "ts-node ./node-scripts/release-to-branch.ts",
     "test": "jasmine --require=ts-node/register",
     "posttest": "npm run lint"
