@@ -9,7 +9,7 @@ import createBubleConfig from 'buble-config-rhino';
 import buble from '@rollup/plugin-buble';
 import pkg from './package.json';
 
-const OUTPUT_DIR = 'build/dist';
+const OUTPUT_DIR = 'build';
 const OUTPUT_DIR_RELAY = `${OUTPUT_DIR}/relay`;
 
 /** @type {import('rollup').RollupOptions} */
