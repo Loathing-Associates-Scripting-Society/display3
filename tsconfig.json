@@ -1,8 +1,7 @@
-// "Solution" tsconfig for compiling all TS files
+// "Solution" tsconfig for code that runs in Node.js (testing, scripts)
 // Also used for type checking within VS Code
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": {"outDir": "build"},
-  "files": [],
-  "references": [{"path": "node-scripts"}, {"path": "spec"}, {"path": "src"}]
+  // KoLmafia code uses separate tsconfig
+  "exclude": ["src"]
 }

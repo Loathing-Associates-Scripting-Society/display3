@@ -1,4 +1,0 @@
-// Configuration for Node.js scripts
-{
-  "extends": "../tsconfig.base.json"
-}

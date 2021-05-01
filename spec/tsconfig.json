@@ -1,5 +1,0 @@
-// Configuration for tests
-{
-  "extends": "../tsconfig.base.json",
-  "references": [{"path": "../src"}]
-}
