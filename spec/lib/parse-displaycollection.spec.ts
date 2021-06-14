@@ -24,9 +24,11 @@ mock('kolmafia', {
   xpath,
 });
 
-(global as typeof global & {
-  JavaException: typeof JavaException;
-}).JavaException = JavaException;
+(
+  global as typeof global & {
+    JavaException: typeof JavaException;
+  }
+).JavaException = JavaException;
 
 (global as typeof global & {Item: typeof Item}).Item = Item;
 

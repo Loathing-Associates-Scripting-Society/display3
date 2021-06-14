@@ -1,7 +1,7 @@
 import {visitUrl, write} from 'kolmafia';
 import {sinceKolmafiaRevision} from 'kolmafia-util';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import h from 'vhtml';
+import h, {JSX} from 'vhtml';
 
 import {DisplayCaseShelf, parseShelves} from '../lib/parse-displaycollection';
 
@@ -88,7 +88,8 @@ export function main(): void {
   }
 
   // Find the vanilla Display Case shelves
-  const vanillaTableSectionPattern = /<center>.*?<td height=4><\/td><\/tr><\/table><\/center>/gi;
+  const vanillaTableSectionPattern =
+    /<center>.*?<td height=4><\/td><\/tr><\/table><\/center>/gi;
   vanillaTableSectionPattern.lastIndex = vanillaTableSearchPos;
   const vanillaTableSectionMatch = vanillaTableSectionPattern.exec(html);
   if (!vanillaTableSectionMatch) {
