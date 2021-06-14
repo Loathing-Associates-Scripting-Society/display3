@@ -3,6 +3,8 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    // Needed for paths field
+    "baseUrl": ".",
     "composite": true,
     // Import CommonJS modules using standard ESM syntax
     "esModuleInterop": true,
@@ -11,6 +13,9 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "null",
     "outDir": "build",
+    "paths": {
+      "kolmafia": ["./node_modules/kolmafia-types"]
+    },
     "rootDir": "."
   }
 }
