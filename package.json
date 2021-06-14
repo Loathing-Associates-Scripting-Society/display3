@@ -10,7 +10,7 @@
     "lint": "gts lint",
     "prerelease": "npm run clean && npm run build",
     "release": "ts-node ./node-scripts/release-to-branch.ts",
-    "test": "jasmine --require=ts-node/register",
+    "test": "jasmine --require=tsconfig-paths/register --require=ts-node/register",
     "posttest": "npm run lint"
   },
   "repository": {
@@ -41,13 +41,14 @@
     "fs-extra": "^9.1.0",
     "gts": "^3.1.0",
     "jasmine": "^3.6.4",
-    "kolmafia": "npm:kolmafia-types@0.0.6",
     "kolmafia-stubs": "^0.1.0",
+    "kolmafia-types": "^0.1.1",
     "mock-require": "^3.0.3",
     "rollup": "^2.41.2",
     "rollup-plugin-copy": "^3.4.0",
     "simple-git": "^2.36.2",
     "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.2.3"
   },
   "dependencies": {
